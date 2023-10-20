@@ -8,11 +8,9 @@ namespace Business.Models.Request.Create
 {
     public class CreateAppointmentDTO
     {
-        public int Id { get; set; }
-
         public DateTime Date { get; set; }
         public string Reason { get; set; }
         public bool IsConfirmed { get; set; }
-        public int UserID { get; set; }
+        public int userID { get; set; }
     }
 }

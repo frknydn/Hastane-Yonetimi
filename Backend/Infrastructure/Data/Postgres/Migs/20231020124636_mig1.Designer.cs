@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Data.Postgres.Migs
 {
     [DbContext(typeof(PostgresContext))]
-    [Migration("20231020114818_Initial")]
-    partial class Initial
+    [Migration("20231020124636_mig1")]
+    partial class mig1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,6 +30,8 @@ namespace Infrastructure.Data.Postgres.Migs
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("AppointmentDate")
                         .HasColumnType("timestamp with time zone");
@@ -54,6 +56,8 @@ namespace Infrastructure.Data.Postgres.Migs
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("userID");
 
                     b.ToTable("Appointments");
                 });
@@ -94,6 +98,8 @@ namespace Infrastructure.Data.Postgres.Migs
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -115,6 +121,8 @@ namespace Infrastructure.Data.Postgres.Migs
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("userID");
 
                     b.ToTable("Prescriptions");
                 });
@@ -216,7 +224,7 @@ namespace Infrastructure.Data.Postgres.Migs
                 {
                     b.HasOne("Infrastructure.Data.Postgres.Entities.User", "User")
                         .WithMany("Appointments")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("userID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -227,7 +235,7 @@ namespace Infrastructure.Data.Postgres.Migs
                 {
                     b.HasOne("Infrastructure.Data.Postgres.Entities.User", "User")
                         .WithMany("Prescriptions")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("userID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

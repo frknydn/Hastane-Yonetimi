@@ -8,10 +8,10 @@ namespace Business.Models.Request.Create
 {
     public class CreatePrescriptionsDTO
     {
-        public int Id { get; set; }
-
+       
         public string Medication { get; set; }
         public string Instructions { get; set; }
-        public int UserID { get; set; }
+        public int userID { get; set; }
+
     }
 }

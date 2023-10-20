@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Infrastructure.Data.Postgres.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,8 @@ namespace Business.Models.Request.Update
 {
     public class UpdateUserCommentsDTO
     {
+        public int UserId { get; set; }
+
+        public int CommentId { get; set; }
     }
 }

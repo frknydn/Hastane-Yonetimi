@@ -36,7 +36,6 @@ namespace Infrastructure.Data.Postgres.Repositories
 
         public async Task AddAsync(Appointment entity)
         {
-            
             entity = ConvertDateTimePropertiesToUtc(entity);
 
             await PostgresContext.Set<Appointment>().AddAsync(entity);
@@ -58,7 +57,6 @@ namespace Infrastructure.Data.Postgres.Repositories
                 var value = (DateTime?)property.GetValue(entity);
                 if (value.HasValue)
                 {
-                    // Zaman dilimini UTC'ye dönüştür
                     property.SetValue(entity, value.Value.ToUniversalTime());
                 }
             }

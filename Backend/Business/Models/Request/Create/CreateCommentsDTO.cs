@@ -8,10 +8,10 @@ namespace Business.Models.Request.Create
 {
     public class CreateCommentsDTO
     {
-        public int Id { get; set; }
+        
         public string Header { get; set; }
         public string Content { get; set; }
-        public int UserID { get; set; }
+        
 
     }
 }

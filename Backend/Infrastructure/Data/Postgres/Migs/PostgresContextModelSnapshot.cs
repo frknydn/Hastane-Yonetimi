@@ -28,6 +28,8 @@ namespace Infrastructure.Data.Postgres.Migs
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
                     b.Property<DateTime>("AppointmentDate")
                         .HasColumnType("timestamp with time zone");
 
@@ -51,6 +53,8 @@ namespace Infrastructure.Data.Postgres.Migs
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("userID");
 
                     b.ToTable("Appointments");
                 });
@@ -91,6 +95,8 @@ namespace Infrastructure.Data.Postgres.Migs
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -112,6 +118,8 @@ namespace Infrastructure.Data.Postgres.Migs
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("userID");
 
                     b.ToTable("Prescriptions");
                 });
@@ -213,7 +221,7 @@ namespace Infrastructure.Data.Postgres.Migs
                 {
                     b.HasOne("Infrastructure.Data.Postgres.Entities.User", "User")
                         .WithMany("Appointments")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("userID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -224,7 +232,7 @@ namespace Infrastructure.Data.Postgres.Migs
                 {
                     b.HasOne("Infrastructure.Data.Postgres.Entities.User", "User")
                         .WithMany("Prescriptions")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("userID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Data.Postgres.Migs
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class mig1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -56,7 +56,8 @@ namespace Infrastructure.Data.Postgres.Migs
                 name: "Appointments",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false).Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     AppointmentDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Reason = table.Column<string>(type: "text", nullable: false),
                     IsConfirmed = table.Column<bool>(type: "boolean", nullable: false),
@@ -69,8 +70,8 @@ namespace Infrastructure.Data.Postgres.Migs
                 {
                     table.PrimaryKey("PK_Appointments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Appointments_User_Id",
-                        column: x => x.Id,
+                        name: "FK_Appointments_User_userID",
+                        column: x => x.userID,
                         principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -80,7 +81,8 @@ namespace Infrastructure.Data.Postgres.Migs
                 name: "Prescriptions",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false).Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Medication = table.Column<string>(type: "text", nullable: false),
                     Instructions = table.Column<string>(type: "text", nullable: false),
                     userID = table.Column<int>(type: "integer", nullable: false),
@@ -92,8 +94,8 @@ namespace Infrastructure.Data.Postgres.Migs
                 {
                     table.PrimaryKey("PK_Prescriptions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Prescriptions_User_Id",
-                        column: x => x.Id,
+                        name: "FK_Prescriptions_User_userID",
+                        column: x => x.userID,
                         principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -143,6 +145,16 @@ namespace Infrastructure.Data.Postgres.Migs
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Appointments_userID",
+                table: "Appointments",
+                column: "userID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Prescriptions_userID",
+                table: "Prescriptions",
+                column: "userID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserComments_CommentId",

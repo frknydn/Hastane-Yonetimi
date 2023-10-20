@@ -14,7 +14,10 @@ namespace Infrastructure.Data.Postgres.EntityFramework.Configurations
     {
         public void Configure(EntityTypeBuilder<UserComment> builder)
         {
-            
+            builder.HasKey(a => a.UserCommentID);
+            builder.Property(a => a.UserCommentID).ValueGeneratedOnAdd();
+            builder.Property(a => a.UserId);
+            builder.Property(a => a.CommentId);
         }
     }
 }

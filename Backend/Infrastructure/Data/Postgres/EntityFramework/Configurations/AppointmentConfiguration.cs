@@ -20,7 +20,7 @@ namespace Infrastructure.Data.Postgres.EntityFramework.Configurations
 
             builder.HasOne(a => a.User)
                 .WithMany(u => u.Appointments)
-                .HasForeignKey(a => a.Id);
+                .HasForeignKey(a => a.userID);
         }
     }
 }

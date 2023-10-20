@@ -9,8 +9,9 @@ namespace Business.Models.Request.Create
 {
     public class CreateUserCommentDTO
     {
-        public int Id { get; set; }
-        public int UserId { get; set; }
+        public int UserCommentID { get; set; }
+        public int userId { get; set; }
+
         public int CommentId { get; set; }
     }
 }

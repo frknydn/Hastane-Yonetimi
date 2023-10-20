@@ -8,5 +8,7 @@ namespace Business.Models.Request.Update
 {
     public class UpdateCommentsDTO
     {
+        public string Header { get; set; }
+        public string Content { get; set; }
     }
 }

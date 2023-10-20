@@ -20,11 +20,12 @@ public class UserConfiguration : BaseConfiguration<User,int>
         builder.Property(u => u.UserType).IsRequired();
         builder.HasMany(u => u.Prescriptions)
            .WithOne(p => p.User)
-           .HasForeignKey(p => p.Id);
+           .HasForeignKey(p => p.userID);
 
         builder.HasMany(u => u.Appointments)
             .WithOne(a => a.User)
-            .HasForeignKey(a => a.Id);
+            .HasForeignKey(a => a.userID);
+       
 
         builder.HasMany(u => u.UserComments)
             .WithOne(uc => uc.User)

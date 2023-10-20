@@ -19,7 +19,7 @@ namespace Infrastructure.Data.Postgres.EntityFramework.Configurations
 
             builder.HasOne(p => p.User)
                 .WithMany(u => u.Prescriptions)
-                .HasForeignKey(p => p.Id);
+                .HasForeignKey(p => p.userID);
         }
     }
 }

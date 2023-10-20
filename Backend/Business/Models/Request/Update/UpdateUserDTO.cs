@@ -8,5 +8,9 @@ namespace Business.Models.Request.Update
 {
     public class UpdateUserDTO
     {
+        public string Email { get; set; } = default!;
+        public string UserName { get; set; } = default!;
+        public string FirstName { get; set; } = default!;
+        public string LastName { get; set; } = default!;
     }
 }

@@ -5,6 +5,7 @@ import { AppointmentRequest } from 'src/core/models/request/appointment-request.
 import { ResponseStatus } from 'src/core/models/response/base-response.model';
 import { User } from 'src/core/models/user.model';
 import { ApiService } from 'src/core/services/api/api.service';
+import { AuthService } from 'src/core/services/auth/auth.service';
 
 @Component({
   selector: 'app-randevu',
@@ -14,9 +15,10 @@ import { ApiService } from 'src/core/services/api/api.service';
 export class RandevuComponent implements OnInit {
   constructor(
     private readonly apiService: ApiService,
-    private router: Router
+    private router: Router,
+    private authService:AuthService
   ) {}
-
+currentUser:User|null=null;
   appointments: Appointment[] = [];
   users: User[] = [];
   ngOnInit() {
@@ -25,7 +27,9 @@ export class RandevuComponent implements OnInit {
       this.users = response.data;
       console.log(this.users);
     });
-    
+    this.authService.currentUser.subscribe(u=>{
+      this.currentUser=u;
+    })
   }
 
   getAppointments() {
@@ -55,7 +59,7 @@ export class RandevuComponent implements OnInit {
   }
 
   showAddForm = false; // Randevu ekleme formunu göstermek için bir bayrak
-  newAppointment: Appointment = new Appointment(); 
+  newAppointment: AppointmentRequest = new AppointmentRequest(); 
   addAppointment() {
     // Yeni randevu verilerini API'ye göndermek için bir AppointmentRequest oluşturun
     const appointmentRequest: AppointmentRequest = {

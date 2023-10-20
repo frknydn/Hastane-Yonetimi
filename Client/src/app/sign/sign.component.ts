@@ -73,6 +73,12 @@ export class SignComponent implements OnInit {
       if (status === ResponseStatus.Ok) {
         // Başarılı kayıt işlemi
         await this.router.navigate(['']);
+        this.registerRequest.Password = '';
+        this.registerRequest.LastName = '';
+        this.registerRequest.FirstName = '';       
+        this.registerRequest.Email = '';       
+        
+        alert('kayıt başarıyla oluşturuldu')
       } else if (status === ResponseStatus.Invalid) {
         // Geçersiz veri
         this.registerRequest.Password = '';
